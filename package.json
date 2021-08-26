@@ -1,0 +1,20 @@
+{
+    "scripts": {
+        "prepublishOnly": "git checkout master",
+        "publish": "cd ../ && git subtree push --prefix backend origin backend",
+        "start": "node ./bin.www",
+        "dev": "nodemon ./bin/www"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
+        "ejs": "^3.1.6",
+        "express": "^4.17.1",
+        "http-errors": "^1.8.0",
+        "morgan": "^1.10.0",
+        "mysql": "^2.18.1",
+        "nanoid": "^3.1.23",
+        "nodemon": "^2.0.12",
+        "pg": "^8.7.1"
+    }
+}
