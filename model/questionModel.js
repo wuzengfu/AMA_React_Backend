@@ -4,7 +4,7 @@ const db = getPool();
 function getAllQuestions(user_session) {
     let sql = `SELECT question_id, question_description, is_answered, answer, follow_up_to
                FROM questions
-               WHERE user_session = $1;`;
+               WHERE user_session = $1 ORDER BY question_id;`;
     let args = [user_session];
 
     return db.query(sql, args).then(result => result.rows);
