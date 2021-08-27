@@ -42,18 +42,11 @@
 
 const pg = require("pg");
 const Pool = pg.Pool;
-// pg.defaults.ssl = true;
+pg.defaults.ssl = true;
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
-
-const config = {
-    host: 'localhost',
-    user: 'postgres',
-    database: 'ask_me_anything',
-    password: '18106910338'
-}
 
 let pool;
 module.exports.getPool = function () {
-    if (!pool) pool = new Pool(config); //{connectionString: process.env.DATABASE_URL}
+    if (!pool) pool = new Pool({connectionString: process.env.DATABASE_URL});
     return pool;
 };
