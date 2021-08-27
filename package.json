@@ -2,7 +2,7 @@
     "scripts": {
         "prepublishOnly": "git checkout master",
         "publish": "cd ../ && git subtree push --prefix backend origin backend",
-        "start": "node ./bin.www",
+        "start": "node ./bin/www",
         "dev": "nodemon ./bin/www"
     },
     "dependencies": {
