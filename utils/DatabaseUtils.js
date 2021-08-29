@@ -1,59 +1,23 @@
-// const mysql = require('mysql');
-//
-// let connection;
-// require('dotenv').config();
-//
-// class Database {
-//     constructor() {
-//         if (!connection) connection = mysql.createPool(
-//             {
-//                 connectionLimit: 15,
-//                 host: process.env.DB_HOST || "localhost",
-//                 user: process.env.DB_USER || "root",
-//                 password: process.env.DB_PASSWORD || "18106910338",
-//                 database: process.env.DB_NAME || "ask_me_anything",
-//             });
-//     }
-//
-//     query(sql, args) {
-//         return new Promise((resolve, reject) => {
-//             connection.query(sql, args, (err, rows) => {
-//                 if (err) {
-//                     console.error(err);
-//                     return reject(err);
-//                 }
-//                 resolve(rows);
-//             });
-//         })
-//     }
-//
-//     close() {
-//         return new Promise((resolve, reject) => {
-//             connection.end(err => {
-//                 if (err) return reject(err);
-//                 resolve();
-//             });
-//         });
-//     }
-// }
-//
-// module.exports = Database;
-//
-
 const pg = require("pg");
 const Pool = pg.Pool;
-// pg.defaults.ssl = true;
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
-const config = {
-    host: 'localhost',
-    user: 'postgres',
-    database: 'ask_me_anything',
-    password: '18106910338'
+require('dotenv').config();
+let config = {
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+}
+
+if (process.env.DATABASE_URL) {
+    pg.defaults.ssl = true;
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+    config = {connectionString: process.env.DATABASE_URL};
 }
 
 let pool;
 module.exports.getPool = function () {
-    if (!pool) pool = new Pool(config); //{connectionString: process.env.DATABASE_URL}
+    if (!pool) pool = new Pool(config);
     return pool;
 };

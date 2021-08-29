@@ -11,7 +11,6 @@ require('dotenv').config();
 /**
  * Get port and host from environment and store in Express.
  */
-let host = process.env.HOST || "localhost";
 let port = normalizePort(process.env.PORT || "3000");
 
 /**
@@ -24,7 +23,7 @@ let server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, host);
+server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
 
